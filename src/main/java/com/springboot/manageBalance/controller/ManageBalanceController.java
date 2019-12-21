@@ -43,6 +43,8 @@ public class ManageBalanceController {
 
 	  @GetMapping("/{id}")
 	  public Mono<ResponseEntity<ManageBalance>> search(@PathVariable String id) {
+		  
+			LOGGER.info("NUMERO DE CUENTA :--->"+id);
 
 	    return service.findById(id).map(m -> ResponseEntity.ok()
 	      .contentType(MediaType.APPLICATION_JSON).body(m))

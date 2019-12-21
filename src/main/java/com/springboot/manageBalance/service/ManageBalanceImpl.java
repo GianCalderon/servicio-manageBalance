@@ -1,8 +1,12 @@
 package com.springboot.manageBalance.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springboot.manageBalance.client.ManageOperationClient;
+import com.springboot.manageBalance.controller.ManageBalanceController;
 import com.springboot.manageBalance.document.ManageBalance;
 import com.springboot.manageBalance.repo.ManageBalanceRepo;
 
@@ -12,8 +16,14 @@ import reactor.core.publisher.Mono;
 @Service
 public class ManageBalanceImpl implements ManageBalanceInterface {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(ManageBalanceImpl.class);
+	
 	@Autowired
 	ManageBalanceRepo repo;
+	
+	@Autowired
+	ManageOperationClient client;
+	
 	
 	
 	@Override
@@ -24,13 +34,16 @@ public class ManageBalanceImpl implements ManageBalanceInterface {
 
 	@Override
 	public Mono<ManageBalance> findById(String id) {
+		
+		LOGGER.info("NUMERO DE CUENTA :--->"+id);
+		
 		// TODO Auto-generated method stub
 		return repo.findById(id);
 	}
 
 	@Override
 	public Mono<ManageBalance> save(ManageBalance manageBalance) {
-		// TODO Auto-generated method stub
+		
 		return repo.save(manageBalance);
 	}
 
